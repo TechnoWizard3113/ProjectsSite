@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-radius: 12px;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive 20-Project Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* Fully Clickable Picture Card */
+        .portfolio-card {
+            position: relative;
+            display: block;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-decoration: none;
+            aspect-ratio: 16 / 10;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Full Background Image Setup */
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Text Overlay */
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            color: #fff;
+        }
+
+        .card-overlay h2 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .card-overlay p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Web Projects</h1>
+        <p>A collection of my web design and development work.</p>
+    </header>
+
+    <!-- The container where your 20 projects will automatically load -->
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+
+    <script>
+        // Edit this list to update your 20 projects.
+        // Replace the "#" with your actual live URLs.
+        // Replace the image URLs with your local project screenshot filenames (e.g., "img/project1.png")
+        const projects = [
+            { title: "Apex", desc: "Short description of website 1", url: "https://technowizard3113.github.io/Apex/", img: "https://unsplash.com" },
+            { title: "ModrinthModDownloader", desc: "Short description of website 2", url: "https://technowizard3113.github.io/ModrinthModDownloader/", img: "https://unsplash.com" },
+            { title: "SkriptForge", desc: "Short description of website 3", url: "https://technowizard3113.github.io/SkriptForge/", img: "https://unsplash.com" },
+            { title: "SkriptGUIBuilder", desc: "Short description of website 4", url: "https://technowizard3113.github.io/skript-gui-builder/", img: "https://unsplash.com" },
+            { title: "Project Five", desc: "Short description of website 5", url: "#", img: "https://unsplash.com" },
+            { title: "Project Six", desc: "Short description of website 6", url: "#", img: "https://unsplash.com" },
+            { title: "Project Seven", desc: "Short description of website 7", url: "#", img: "https://unsplash.com" },
+            { title: "Project Eight", desc: "Short description of website 8", url: "#", img: "https://unsplash.com" },
+            { title: "Project Nine", desc: "Short description of website 9", url: "#", img: "https://unsplash.com" },
+            { title: "Project Ten", desc: "Short description of website 10", url: "#", img: "https://unsplash.com" },
+            { title: "Project Eleven", desc: "Short description of website 11", url: "#", img: "https://unsplash.com" },
+            { title: "Project Twelve", desc: "Short description of website 12", url: "#", img: "https://unsplash.com" },
+            { title: "Project Thirteen", desc: "Short description of website 13", url: "#", img: "https://unsplash.com" },
+            { title: "Project Fourteen", desc: "Short description of website 14", url: "#", img: "https://unsplash.com" },
+            { title: "Project Fifteen", desc: "Short description of website 15", url: "#", img: "https://unsplash.com" },
+            { title: "Project Sixteen", desc: "Short description of website 16", url: "#", img: "https://unsplash.com" },
+            { title: "Project Seventeen", desc: "Short description of website 17", url: "#", img: "https://unsplash.com" },
+            { title: "Project Eighteen", desc: "Short description of website 18", url: "#", img: "https://unsplash.com" },
+            { title: "Project Nineteen", desc: "Short description of website 19", url: "#", img: "https://unsplash.com" },
+            { title: "Project Twenty", desc: "Short description of website 20", url: "#", img: "https://unsplash.com" }
+        ];
+
+        // This script automatically builds the 20 HTML cards for you
+        const grid = document.getElementById('portfolioGrid');
+        projects.forEach(p => {
+            const card = document.createElement('a');
+            card.href = p.url;
+            card.target = "_blank";
+            card.className = "portfolio-card";
+            card.innerHTML = `
+                <img src="${p.img}" alt="${p.title}">
+                <div class="card-overlay">
+                    <h2>${p.title}</h2>
+                    <p>${p.desc}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
